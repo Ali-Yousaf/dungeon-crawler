@@ -59,6 +59,9 @@ TagManager:
   - name: Player
     uniqueID: 183921935
     locked: 0
+  - name: Shield
+    uniqueID: 622966563
+    locked: 0
   - name: WalkBehind
     uniqueID: 1575297599
     locked: 0

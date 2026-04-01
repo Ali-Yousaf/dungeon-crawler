@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Diagnostics;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fireballSpeed = 8f;
     [SerializeField] private float attackDuration = 0.3f;
 
+    
+    [SerializeField] private GameObject sheildGameObject;
+    public bool sheildActived = false;
     private Animator animator;
     private bool isAttacking = false;
     public bool canAttack = false;
@@ -44,6 +49,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         HandleMovement();
+
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            ToggleShield();
+        }
 
         if (Input.GetKeyDown(KeyCode.Q) && !isAttacking)
         {
@@ -119,5 +129,13 @@ public class PlayerMovement : MonoBehaviour
         isKnockedBack = true;
         knockbackTimer = duration;
         knockbackVelocity = direction.normalized * force;
+    }
+
+    private void ToggleShield()
+    {
+        bool isActive = !sheildGameObject.activeSelf;
+
+        sheildGameObject.SetActive(isActive);
+        sheildActived = isActive;
     }
 }

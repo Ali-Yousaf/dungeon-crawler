@@ -19,19 +19,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fireballSpeed = 8f;
     [SerializeField] private float attackDuration = 0.3f;
 
-    
+    [Header("Shield Settings")]
     [SerializeField] private GameObject sheildGameObject;
-    public bool sheildActived = false;
-    private Animator animator;
-    private bool isAttacking = false;
-    public bool canAttack = false;
+    [SerializeField] private float shieldDuration = 5f;
+    private bool sheildActived = false;
+    private Coroutine shieldRoutine;
 
     // ----- Knockback -----
     private bool isKnockedBack = false;
     private Vector2 knockbackVelocity;
     private float knockbackTimer;
-
+    
     AudioManager audioManager;
+    private Animator animator;
+    private bool isAttacking = false;
+    public bool canAttack = false;
 
     private void Awake()
     {
@@ -52,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.T))
         {
-            ToggleShield();
+            ActiveShield();
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && !isAttacking)
@@ -131,11 +133,31 @@ public class PlayerMovement : MonoBehaviour
         knockbackVelocity = direction.normalized * force;
     }
 
-    private void ToggleShield()
+    private void ActiveShield()
     {
-        bool isActive = !sheildGameObject.activeSelf;
+        if (sheildActived) return;
 
-        sheildGameObject.SetActive(isActive);
-        sheildActived = isActive;
+        if (ShieldUIManager.Instance.shieldCount <= 0)
+        {
+            return;
+        }
+
+        ShieldUIManager.Instance.UseShield();
+
+        if (shieldRoutine != null)
+            StopCoroutine(shieldRoutine);
+
+        shieldRoutine = StartCoroutine(ShieldRoutine());
+    }
+
+    private IEnumerator ShieldRoutine()
+    {
+        sheildActived = true;
+        sheildGameObject.SetActive(true);
+
+        yield return new WaitForSeconds(shieldDuration);
+
+        sheildGameObject.SetActive(false);
+        sheildActived = false;
     }
 }

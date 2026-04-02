@@ -10,6 +10,7 @@ TagManager:
   - Trap
   - AudioManager
   - DialougeNPC
+  - PlayerShield
   layers:
   - Default
   - TransparentFX

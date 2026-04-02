@@ -27,15 +27,15 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.B))
-        //{
-        //    TakeDamage(1);
-        //}
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+           TakeDamage(1);
+        }
 
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    Heal(1);
-        //}
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+           Heal(1);
+        }
     }
 
     private void Start()

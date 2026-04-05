@@ -9,7 +9,5 @@ public class RingPickup : Pickup
         //ending sequence
         QuestManager.Instance.IncrementObjective("0");
         ringCollected = true;
-
-
     }
 }

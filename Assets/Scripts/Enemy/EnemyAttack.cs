@@ -27,14 +27,13 @@ public class EnemyAttack : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if (distance <= attackRadius)
+        if (distance <= attackRadius && !PlayerMovement.Instance.sheildActived)
         {
             TryAttack();
         }
 
         else
         {
-            // Exit attack state
             isAttacking = false;
             animator.SetBool("isAttacking", false);
         }

@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Shield Settings")]
     [SerializeField] private GameObject sheildGameObject;
     [SerializeField] private float shieldDuration = 5f;
-    private bool sheildActived = false;
+    public bool sheildActived = false;
     private Coroutine shieldRoutine;
 
     // ----- Knockback -----

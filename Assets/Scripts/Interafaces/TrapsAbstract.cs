@@ -25,6 +25,11 @@ public abstract class TrapBase : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            if(PlayerMovement.Instance.sheildActived)
+            {
+                return;
+            }
+            
             PlayerHealth.Instance.TakeDamage(damage);
             OnPlayerHit();
         }
